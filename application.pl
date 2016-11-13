@@ -53,7 +53,7 @@ match_language(Language) :-
 :- dynamic(knowledge_base/2).
 
 clear_facts :-
-  retractall(progress(_, _)).
+  retractall(knowledge_base(_, _)).
 
 % main
 main :-
