@@ -9,9 +9,9 @@ question(why) :-
   write('Dlaczego chcesz nauczyc sie programowac?'), nl.
 
 why(Answer) :-
-  progress(why, Answer).
+  knowledge_base(why, Answer).
 why(Answer) :-
-  \+ progress(why, _),
+  \+ knowledge_base(why, _),
   ask(why, Answer, [entertainment, money]).
 
 answer(entertainment) :-
@@ -44,13 +44,13 @@ ask(Question, Answer, Choices) :-
   answers(Choices, 0),
   read(Index),
   parse(Index, Choices, Response),
-  asserta(progress(Question, Response)),
+  asserta(knowledge_base(Question, Response)),
   Response = Answer.
 
 match_language(Language) :- 
   language(Language), !.
 
-:- dynamic(progress/2).
+:- dynamic(knowledge_base/2).
 
 clear_facts :-
   retractall(progress(_, _)).
