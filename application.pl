@@ -1,23 +1,26 @@
 % hypothesis
 language(python) :-
   why(entertainment),
-  learning_preference(easy).
+  learning_preference(easy),
+  control(automatic).
 
 language(java) :-
   why(money),
-  learning_preference(easy).
+  learning_preference(hard),
+  control(automatic).
 
 language(cpp) :-
-  why(experience),
+  (why(experience);why(money)), /* ; alternatywa, czyli cpp jesli dla rozwoju lub hajsow*/
   learning_preference(hard).
 
 language(c) :-
   why(experience),
-  learning_preference(hardest).
+  learning_preference(hardest),
+  control(manual).
 
 language(objc) :-
   why(money),
-  learning_preference(easy).
+  learning_preference(hard).
   
 /*
 language(js) :-
@@ -38,7 +41,16 @@ question(why) :-
   
 question(learning_preference) :-
   write('Jakich rzeczy wolisz sie uczyc?'), nl.
+  
+question(control) :-
+  write('Wolisz pelna manualna kontrole czy czesciowa automatyzacje?'), nl.
 
+control(Answer) :- 
+  knowledge_base(control, Answer).
+control(Answer) :-
+  \+ knowledge_base(control, _),
+  ask(control, Answer, [manual, automatic]).
+  
 learning_preference(Answer) :-
   knowledge_base(learning_preference, Answer).
 learning_preference(Answer) :-
@@ -50,6 +62,12 @@ why(Answer) :-
 why(Answer) :-
   \+ knowledge_base(why, _),
   ask(why, Answer, [entertainment, money, experience]).
+  
+answer(manual) :-
+  write('manualna').
+  
+answer(automatic) :-
+  write('automatyzacje').
 
 answer(easy) :-
   write('latwych').
