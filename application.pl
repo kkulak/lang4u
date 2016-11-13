@@ -8,9 +8,11 @@ language(java) :-
   learning_preference(easy).
 
 language(cpp) :-
+  why(experience),
   learning_preference(hard).
 
 language(c) :-
+  why(experience),
   learning_preference(hardest).
 
 language(objc) :-
@@ -19,8 +21,6 @@ language(objc) :-
   
 /*
 language(js) :-
-
-
 
 
 language(php) :-
@@ -49,7 +49,7 @@ why(Answer) :-
   knowledge_base(why, Answer).
 why(Answer) :-
   \+ knowledge_base(why, _),
-  ask(why, Answer, [entertainment, money]).
+  ask(why, Answer, [entertainment, money, experience]).
 
 answer(easy) :-
   write('latwych').
@@ -65,7 +65,11 @@ answer(entertainment) :-
 
 answer(money) :-
   write('$$').
+  
+answer(experience) :-
+  write('rozwoj').
 
+%descriptions
 describe(python) :-
   write('Python').
 
