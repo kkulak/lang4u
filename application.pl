@@ -7,32 +7,33 @@ language(python) :-
 language(java) :-
   why(money),
   learning_preference(hard),
+  (which_platform(erp); which_platform(mobile)),
   control(automatic).
 
 language(cpp) :-
-  (why(experience);why(money)), /* ; alternatywa, czyli cpp jesli dla rozwoju lub hajsow*/
+  which_platform(gaming),
+  (why(experience);why(money)),
   learning_preference(hard).
 
 language(c) :-
   why(experience),
+  which_platform(embedded),
   learning_preference(hardest),
   control(manual).
 
 language(objc) :-
   why(money),
+  which_platform(mobile),
   learning_preference(hard).
   
 /*
 language(js) :-
-
-
 language(php) :-
   
-
 language(ruby) :-
 */
 
-language(csharp) :-	
+language(csharp) :- 
   why(money),
   learning_preference(easy).
  
@@ -45,6 +46,9 @@ question(learning_preference) :-
 question(control) :-
   write('Wolisz pelna manualna kontrole czy czesciowa automatyzacje?'), nl.
 
+question(which_platform) :-
+  write('Wybierz swoja ulubiona platforme'), nl.
+
 control(Answer) :- 
   knowledge_base(control, Answer).
 control(Answer) :-
@@ -56,6 +60,12 @@ learning_preference(Answer) :-
 learning_preference(Answer) :-
   \+ knowledge_base(learning_preference, _),
   ask(learning_preference, Answer, [easy, hard, hardest]).  
+
+which_platform(Answer) :-
+  knowledge_base(which_platform, Answer).
+which_platform(Answer) :-
+  \+ knowledge_base(which_platform, _),
+  ask(which_platform, Answer, [erp, gaming, embedded, mobile]).
 
 why(Answer) :-
   knowledge_base(why, Answer).
@@ -75,6 +85,18 @@ answer(easy) :-
 answer(hard) :-
   write('trudnych').
   
+answer(erp) :-
+  write('Systemy biznesowe klasy ERP').
+
+answer(gaming) :-
+  write('Gry komputerowe').
+
+answer(embedded) :-
+  write('Systemy wbudowane - Arduino, RaspberryPi, etc.').
+
+answer(mobile) :-
+  write('Oprogramowanie przeznaczone dla telefonów komórkowych').
+
 answer(hardest) :-
   write('bardzo trudnych').
   
@@ -82,10 +104,10 @@ answer(entertainment) :-
   write('Rozrywka').
 
 answer(money) :-
-  write('$$').
+  write('Wzgledy zarobkowe').
   
 answer(experience) :-
-  write('rozwoj').
+  write('Rozwoj osobisty').
 
 %descriptions
 describe(python) :-
@@ -96,7 +118,7 @@ describe(java) :-
   
 describe(c) :- 
   write('C').
-	
+  
 describe(cpp) :- 
   write('C++').
   
@@ -108,14 +130,14 @@ describe(php) :-
 
 describe(ruby) :- 
   write('Ruby').
-	
+  
 describe(csharp) :- 
   write('C#').
   
 describe(js) :- 
   write('JavaScript').
 
-	
+  
 % utils
 answers([], _).
 answers([Head|Tail], Index) :-
