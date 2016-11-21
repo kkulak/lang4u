@@ -36,6 +36,8 @@ language(ruby) :-
 language(csharp) :- 
   why(money),
   learning_preference(easy).
+  
+language(fallback).
  
 question(why) :-
   write('Dlaczego chcesz nauczyc sie programowac?'), nl.
@@ -137,6 +139,8 @@ describe(csharp) :-
 describe(js) :- 
   write('JavaScript').
 
+describe(fallback) :- 
+  write('Zaden jezyk nie pasuje do Twoich odpowiedzi.').
   
 % utils
 answers([], _).
