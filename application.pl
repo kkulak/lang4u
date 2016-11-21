@@ -111,6 +111,12 @@ answer(money) :-
 answer(experience) :-
   write('Rozwoj osobisty').
 
+stdout_manual :-
+  write('Witamy!'), nl,
+  write('Program \'Wybierz swoj pierwszy jezyk\' pomoze dobrac Ci swoj pierwszy jezyk programowania'), nl,
+  write('Wystarczy, ze udzielisz odpowiedzi na ponizsze pytania'), nl,
+  write('Wybierz jedna opcje, nastepnie zakoncz interpretacje kropka.'), nl, nl.
+
 %descriptions
 describe(python) :-
   write('Python').
@@ -140,7 +146,7 @@ describe(js) :-
   write('JavaScript').
 
 describe(fallback) :- 
-  write('Zaden jezyk nie pasuje do Twoich odpowiedzi.').
+  write('Zaden jezyk nie pasuje do Twoich odpowiedzi. Moze sprobujesz z Pythonem?').
   
 % utils
 answers([], _).
@@ -173,6 +179,7 @@ clear_facts :-
 
 % main
 main :-
+  stdout_manual,
   clear_facts,
   match_language(Language),
   describe(Language), nl.
