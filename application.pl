@@ -31,10 +31,13 @@ language(objc) :-
 /*
 language(js) :-
 language(php) :-
- 
-language(ruby) :-
 */
- 
+
+language(ruby) :-
+  why(money),
+  company_size(startup),
+  (which_platform(erp); which_platform(web)).
+
 language(csharp) :-
   why(money),
   learning_preference(easy).
@@ -72,7 +75,7 @@ which_platform(Answer) :-
   knowledge_base(which_platform, Answer).
 which_platform(Answer) :-
   \+ knowledge_base(which_platform, _),
-  ask(which_platform, Answer, [erp, gaming, embedded, mobile]).
+  ask(which_platform, Answer, [erp, web, gaming, embedded, mobile]).
  
 why(Answer) :-
   knowledge_base(why, Answer).
@@ -103,6 +106,9 @@ answer(erp) :-
  
 answer(gaming) :-
   write('Gry komputerowe').
+
+answer(web) :- 
+    write('Web').
  
 answer(embedded) :-
   write('Systemy wbudowane - Arduino, RaspberryPi, etc.').
