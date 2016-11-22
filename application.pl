@@ -1,166 +1,186 @@
 % hypothesis
 language(python) :-
   why(entertainment),
+  (company_size(startup); company_size(middle_sized_company)),
   learning_preference(easy),
   control(automatic).
-
+ 
 language(java) :-
   why(money),
-  learning_preference(hard),
+  (company_size(middle_sized_company); company_size(big_corporation)),
+  (learning_preference(easy); learning_preference(hard)),
   (which_platform(erp); which_platform(mobile)),
   control(automatic).
-
+ 
 language(cpp) :-
   which_platform(gaming),
   (why(experience);why(money)),
   learning_preference(hard).
-
+ 
 language(c) :-
   why(experience),
   which_platform(embedded),
   learning_preference(hardest),
   control(manual).
-
+ 
 language(objc) :-
   why(money),
   which_platform(mobile),
   learning_preference(hard).
-  
+ 
 /*
 language(js) :-
 language(php) :-
-  
+ 
 language(ruby) :-
 */
-
-language(csharp) :- 
+ 
+language(csharp) :-
   why(money),
   learning_preference(easy).
-  
+ 
 language(fallback).
  
 question(why) :-
   write('Dlaczego chcesz nauczyc sie programowac?'), nl.
-  
+ 
 question(learning_preference) :-
   write('Jakich rzeczy wolisz sie uczyc?'), nl.
-  
+ 
 question(control) :-
   write('Wolisz pelna manualna kontrole czy czesciowa automatyzacje?'), nl.
-
+ 
 question(which_platform) :-
   write('Wybierz swoja ulubiona platforme'), nl.
-
-control(Answer) :- 
+ 
+question(company_size) :-
+  write('Chcialbys pracowac w'), nl.
+ 
+control(Answer) :-
   knowledge_base(control, Answer).
 control(Answer) :-
   \+ knowledge_base(control, _),
   ask(control, Answer, [manual, automatic]).
-  
+ 
 learning_preference(Answer) :-
   knowledge_base(learning_preference, Answer).
 learning_preference(Answer) :-
   \+ knowledge_base(learning_preference, _),
   ask(learning_preference, Answer, [easy, hard, hardest]).  
-
+ 
 which_platform(Answer) :-
   knowledge_base(which_platform, Answer).
 which_platform(Answer) :-
   \+ knowledge_base(which_platform, _),
   ask(which_platform, Answer, [erp, gaming, embedded, mobile]).
-
+ 
 why(Answer) :-
   knowledge_base(why, Answer).
 why(Answer) :-
   \+ knowledge_base(why, _),
   ask(why, Answer, [entertainment, money, experience]).
-  
+ 
+company_size(Answer) :-
+  knowledge_base(company_size, Answer).
+company_size(Answer) :-
+  \+ knowledge_base(company_size, _),
+  ask(company_size, Answer, [startup, middle_sized_company, big_corporation]).  
+ 
 answer(manual) :-
   write('manualna').
-  
+ 
 answer(automatic) :-
   write('automatyzacje').
-
+ 
 answer(easy) :-
   write('latwych').
-
+ 
 answer(hard) :-
   write('trudnych').
-  
+ 
 answer(erp) :-
   write('Systemy biznesowe klasy ERP').
-
+ 
 answer(gaming) :-
   write('Gry komputerowe').
-
+ 
 answer(embedded) :-
   write('Systemy wbudowane - Arduino, RaspberryPi, etc.').
-
+ 
 answer(mobile) :-
   write('Oprogramowanie przeznaczone dla telefonów komórkowych').
-
+ 
 answer(hardest) :-
   write('bardzo trudnych').
-  
+ 
 answer(entertainment) :-
   write('Rozrywka').
-
+ 
 answer(money) :-
   write('Wzgledy zarobkowe').
-  
+ 
 answer(experience) :-
   write('Rozwoj osobisty').
-
+ 
+answer(startup) :-
+  write('Startupie').
+ 
+answer(middle_sized_company) :-
+  write('Sredniego rozmiaru firmie').
+ 
+answer(big_corporation) :-
+  write('Miedzynarodowej korporacji').
+ 
 stdout_manual :-
   write('Witamy!'), nl,
   write('Program \'Wybierz swoj pierwszy jezyk\' pomoze dobrac Ci swoj pierwszy jezyk programowania'), nl,
   write('Wystarczy, ze udzielisz odpowiedzi na ponizsze pytania'), nl,
   write('Wybierz jedna opcje, nastepnie zakoncz interpretacje kropka.'), nl, nl.
-
+ 
 %descriptions
 describe(python) :-
   write('Python').
-
+ 
 describe(java) :-
   write('Java').
-  
-describe(c) :- 
+ 
+describe(c) :-
   write('C').
-  
-describe(cpp) :- 
+ 
+describe(cpp) :-
   write('C++').
-  
-describe(objc) :- 
+ 
+describe(objc) :-
   write('objective-C').
-  
-describe(php) :- 
+ 
+describe(php) :-
   write('PHP').
-
-describe(ruby) :- 
+ 
+describe(ruby) :-
   write('Ruby').
-  
-describe(csharp) :- 
+ 
+describe(csharp) :-
   write('C#').
-  
-describe(js) :- 
+ 
+describe(js) :-
   write('JavaScript').
-
-describe(fallback) :- 
+ 
+describe(fallback) :-
   write('Zaden jezyk nie pasuje do Twoich odpowiedzi. Moze sprobujesz z Pythonem?').
-  
+ 
 % utils
 answers([], _).
 answers([Head|Tail], Index) :-
   write(Index), write(' '), answer(Head), nl,
   NextIndex is Index + 1,
   answers(Tail, NextIndex).
-
+ 
 parse(0, [Head|_], Head).
 parse(Index, [_|Tail], Response) :-
   Index > 0,
   NextIndex is Index - 1,
   parse(NextIndex, Tail, Response).
-
+ 
 ask(Question, Answer, Choices) :-
   question(Question),
   answers(Choices, 0),
@@ -168,15 +188,15 @@ ask(Question, Answer, Choices) :-
   parse(Index, Choices, Response),
   asserta(knowledge_base(Question, Response)),
   Response = Answer.
-
-match_language(Language) :- 
+ 
+match_language(Language) :-
   language(Language), !.
-
+ 
 :- dynamic(knowledge_base/2).
-
+ 
 clear_facts :-
   retractall(knowledge_base(_, _)).
-
+ 
 % main
 main :-
   stdout_manual,
