@@ -33,6 +33,11 @@ language(js) :-
   (company_size(startup); company_size(middle_sized_company)),
   which_platform(web).
 
+language(matlab) :-
+  why(education),
+  math_background(strong_math_background),
+  which_platform(linear_algebra).
+
 /*
 language(php) :-
 */
@@ -58,10 +63,13 @@ question(control) :-
   write('Wolisz pelna manualna kontrole czy czesciowa automatyzacje?'), nl.
  
 question(which_platform) :-
-  write('Wybierz swoja ulubiona platforme'), nl.
+  write('Wybierz swoja ulubiona dziedzinę:'), nl.
  
 question(company_size) :-
   write('Chcialbys pracowac w'), nl.
+
+question(math_background) :-
+  write('Czy posiadasz matematyczny background?'), nl.
  
 control(Answer) :-
   knowledge_base(control, Answer).
@@ -79,14 +87,20 @@ which_platform(Answer) :-
   knowledge_base(which_platform, Answer).
 which_platform(Answer) :-
   \+ knowledge_base(which_platform, _),
-  ask(which_platform, Answer, [erp, web, gaming, embedded, mobile]).
+  ask(which_platform, Answer, [erp, web, gaming, embedded, mobile, linear_algebra]).
  
 why(Answer) :-
   knowledge_base(why, Answer).
 why(Answer) :-
   \+ knowledge_base(why, _),
-  ask(why, Answer, [entertainment, money, experience]).
- 
+  ask(why, Answer, [entertainment, money, experience, education]).
+
+math_background(Answer) :-
+  knowledge_base(math_background, Answer).
+math_background(Answer) :-
+  \+ knowledge_base(math_background, _),
+  ask(math_background, Answer, [strong_math_background, lack_of_math_background]).
+
 company_size(Answer) :-
   knowledge_base(company_size, Answer).
 company_size(Answer) :-
@@ -120,6 +134,9 @@ answer(embedded) :-
 answer(mobile) :-
   write('Oprogramowanie przeznaczone dla telefonów komórkowych').
  
+answer(linear_algebra) :-
+  write('Algebra liniowa').
+
 answer(hardest) :-
   write('bardzo trudnych').
  
@@ -131,6 +148,9 @@ answer(money) :-
  
 answer(experience) :-
   write('Rozwoj osobisty').
+
+answer(education) :-
+  write('Szkolnictwo').
  
 answer(startup) :-
   write('Startupie').
@@ -140,7 +160,13 @@ answer(middle_sized_company) :-
  
 answer(big_corporation) :-
   write('Miedzynarodowej korporacji').
+
+answer(strong_math_background) :-
+  write('Tak, posiadam, i wiaze swoja przyszlosc z tym kierunkiem').
  
+answer(lack_of_math_background) :-
+  write('Nie posiadam, chcialbym mozliwie odizolowac sie od tej dziedziny').
+
 stdout_manual :-
   write('Witamy!'), nl,
   write('Program \'Wybierz swoj pierwszy jezyk\' pomoze dobrac Ci swoj pierwszy jezyk programowania'), nl,
@@ -174,6 +200,9 @@ describe(csharp) :-
  
 describe(js) :-
   write('JavaScript').
+
+describe(matlab) :-
+  write('Matlab').
  
 describe(fallback) :-
   write('Zaden jezyk nie pasuje do Twoich odpowiedzi. Moze sprobujesz z Pythonem?').
