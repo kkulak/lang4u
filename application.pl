@@ -27,9 +27,13 @@ language(objc) :-
   why(money),
   which_platform(mobile),
   learning_preference(hard).
- 
-/*
+
 language(js) :-
+  why(money),
+  (company_size(startup); company_size(middle_sized_company)),
+  which_platform(web).
+
+/*
 language(php) :-
 */
 
