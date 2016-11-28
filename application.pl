@@ -10,10 +10,10 @@ language(java) :-
   (company_size(middle_sized_company); company_size(big_corporation)),
   (learning_preference(easy); learning_preference(hard)),
   (which_platform(erp); which_platform(mobile)),
-  control(automatic).
+  (control(automatic);control(skip)).
  
 language(cpp) :-
-  which_platform(gaming),
+  (which_platform(gaming);which_paltform(skip)),
   (why(experience);why(money)),
   learning_preference(hard).
  
