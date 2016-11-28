@@ -2,8 +2,8 @@
 language(python) :-
   why(entertainment),
   (company_size(startup); company_size(middle_sized_company)),
-  learning_preference(easy),
-  control(automatic).
+  (learning_preference(easy); learning_preference(skip)),
+  (control(automatic);control(skip)).
  
 language(java) :-
   why(money),
@@ -19,13 +19,13 @@ language(cpp) :-
  
 language(c) :-
   why(experience),
-  which_platform(embedded),
+  (which_platform(embedded);which_platform(skip)),
   learning_preference(hardest),
   control(manual).
  
 language(objc) :-
   why(money),
-  which_platform(mobile),
+  (which_platform(mobile);which_platform(skip)),
   learning_preference(hard).
 
 language(js) :-
@@ -36,7 +36,7 @@ language(js) :-
 language(matlab) :-
   why(education),
   math_background(strong_math_background),
-  which_platform(linear_algebra).
+  (which_platform(linear_algebra);which_platform(skip)).
 
 /*
 language(php) :-
@@ -63,7 +63,7 @@ question(control) :-
   write('Wolisz pelna manualna kontrole czy czesciowa automatyzacje?'), nl.
  
 question(which_platform) :-
-  write('Wybierz swoja ulubiona dziedzinę:'), nl.
+  write('Wybierz swoja ulubiona dziedzine:'), nl.
  
 question(company_size) :-
   write('Chcialbys pracowac w'), nl.
@@ -75,37 +75,37 @@ control(Answer) :-
   knowledge_base(control, Answer).
 control(Answer) :-
   \+ knowledge_base(control, _),
-  ask(control, Answer, [manual, automatic]).
+  ask(control, Answer, [manual, automatic, skip]).
  
 learning_preference(Answer) :-
   knowledge_base(learning_preference, Answer).
 learning_preference(Answer) :-
   \+ knowledge_base(learning_preference, _),
-  ask(learning_preference, Answer, [easy, hard, hardest]).  
+  ask(learning_preference, Answer, [easy, hard, hardest, skip]).  
  
 which_platform(Answer) :-
   knowledge_base(which_platform, Answer).
 which_platform(Answer) :-
   \+ knowledge_base(which_platform, _),
-  ask(which_platform, Answer, [erp, web, gaming, embedded, mobile, linear_algebra]).
+  ask(which_platform, Answer, [erp, web, gaming, embedded, mobile, linear_algebra, skip]).
  
 why(Answer) :-
   knowledge_base(why, Answer).
 why(Answer) :-
   \+ knowledge_base(why, _),
-  ask(why, Answer, [entertainment, money, experience, education]).
+  ask(why, Answer, [entertainment, money, experience, education, skip]).
 
 math_background(Answer) :-
   knowledge_base(math_background, Answer).
 math_background(Answer) :-
   \+ knowledge_base(math_background, _),
-  ask(math_background, Answer, [strong_math_background, lack_of_math_background]).
+  ask(math_background, Answer, [strong_math_background, lack_of_math_background, skip]).
 
 company_size(Answer) :-
   knowledge_base(company_size, Answer).
 company_size(Answer) :-
   \+ knowledge_base(company_size, _),
-  ask(company_size, Answer, [startup, middle_sized_company, big_corporation]).  
+  ask(company_size, Answer, [startup, middle_sized_company, big_corporation, skip]).  
  
 answer(manual) :-
   write('manualna').
@@ -132,7 +132,7 @@ answer(embedded) :-
   write('Systemy wbudowane - Arduino, RaspberryPi, etc.').
  
 answer(mobile) :-
-  write('Oprogramowanie przeznaczone dla telefonów komórkowych').
+  write('Oprogramowanie przeznaczone dla telefonow komorkowych').
  
 answer(linear_algebra) :-
   write('Algebra liniowa').
@@ -166,6 +166,9 @@ answer(strong_math_background) :-
  
 answer(lack_of_math_background) :-
   write('Nie posiadam, chcialbym mozliwie odizolowac sie od tej dziedziny').
+  
+answer(skip) :-
+  write('Nie wiem/pomin').
 
 stdout_manual :-
   write('Witamy!'), nl,
