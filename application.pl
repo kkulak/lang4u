@@ -13,7 +13,7 @@ language(java) :-
   (control(automatic);control(skip)).
  
 language(cpp) :-
-  (which_platform(gaming);which_paltform(skip)),
+  (which_platform(gaming);which_platform(skip)),
   (why(experience);why(money)),
   learning_preference(hard).
  
