@@ -1,19 +1,19 @@
 % hypothesis
 language(python) :-
   why(entertainment),
-  (company_size(startup); company_size(middle_sized_company)),
+  is_(company_size, medium),
   (learning_preference(easy); learning_preference(skip)),
-  (control(automatic);control(skip)).
+  is_(control,easy).
  
 language(java) :-
   why(money),
-  (company_size(middle_sized_company); company_size(big_corporation)),
+  is_(company_size,big),
   (learning_preference(easy); learning_preference(hard)),
   (which_platform(erp); which_platform(mobile)),
-  (control(automatic);control(skip)).
+  is_(control,easy).
  
 language(cpp) :-
-  (which_platform(gaming);which_paltform(skip)),
+  (which_platform(gaming);which_platform(skip)),
   (why(experience);why(money)),
   learning_preference(hard).
  
@@ -21,7 +21,7 @@ language(c) :-
   why(experience),
   (which_platform(embedded);which_platform(skip)),
   learning_preference(hardest),
-  control(manual).
+  is_(control, difficult).
  
 language(objc) :-
   why(money),
@@ -30,7 +30,7 @@ language(objc) :-
 
 language(js) :-
   why(money),
-  (company_size(startup); company_size(middle_sized_company)),
+  is_(company_size, medium),
   which_platform(web).
 
 language(matlab) :-
@@ -38,13 +38,9 @@ language(matlab) :-
   math_background(strong_math_background),
   (which_platform(linear_algebra);which_platform(skip)).
 
-/*
-language(php) :-
-*/
-
 language(ruby) :-
   why(money),
-  company_size(startup),
+  is_(company_size,small),
   (which_platform(erp); which_platform(web)).
 
 language(csharp) :-
@@ -52,6 +48,21 @@ language(csharp) :-
   learning_preference(easy).
  
 language(fallback).
+
+is_(control, easy) :-
+  (control(automatic);control(skip)).
+  
+is_(control, difficult) :-
+  control(manual).
+  
+is_(company_size, small) :-
+  company_size(startup).
+  
+is_(company_size, medium):-
+  (company_size(startup); company_size(middle_sized_company)).
+  
+is_(company_size, big) :-
+  (company_size(middle_sized_company); company_size(big_corporation)).
  
 question(why) :-
   write('Dlaczego chcesz nauczyc sie programowac?'), nl.
