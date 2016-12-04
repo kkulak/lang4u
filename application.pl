@@ -36,7 +36,7 @@ language(js) :-
 language(matlab) :-
   why(education),
   math_background(strong_math_background),
-  (which_platform(linear_algebra);which_platform(skip)).
+  (which_platform(science);which_platform(skip)).
 
 language(ruby) :-
   why(money),
@@ -98,7 +98,7 @@ which_platform(Answer) :-
   knowledge_base(which_platform, Answer).
 which_platform(Answer) :-
   \+ knowledge_base(which_platform, _),
-  ask(which_platform, Answer, [erp, web, gaming, embedded, mobile, linear_algebra, skip]).
+  ask(which_platform, Answer, [erp, web, gaming, embedded, mobile, science, skip]).
  
 why(Answer) :-
   knowledge_base(why, Answer).
@@ -145,8 +145,8 @@ answer(embedded) :-
 answer(mobile) :-
   write('Oprogramowanie przeznaczone dla telefonow komorkowych').
  
-answer(linear_algebra) :-
-  write('Algebra liniowa').
+answer(science) :-
+  write('Nauki scisle').
 
 answer(hardest) :-
   write('bardzo trudnych').
