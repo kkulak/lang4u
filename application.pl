@@ -2,14 +2,15 @@
 language(python) :-
   why(entertainment),
   is_(company_size, medium),
-  (learning_preference(easy); learning_preference(skip)),
+  at_most_(learning_preference, easy),
   is_(control,easy).
  
 language(java) :-
   why(money),
   is_(company_size,big),
-  (learning_preference(easy); learning_preference(hard)),
+  at_most_(learning_preference, hard),
   (which_platform(erp); which_platform(mobile)),
+  favourite_company(google),
   is_(control,easy).
  
 language(cpp) :-
@@ -45,7 +46,8 @@ language(ruby) :-
 
 language(csharp) :-
   why(money),
-  learning_preference(easy).
+  favourite_company(microsoft),
+  at_most_(learning_preference, hard).
  
 language(fallback).
 
@@ -63,7 +65,13 @@ is_(company_size, medium):-
   
 is_(company_size, big) :-
   (company_size(middle_sized_company); company_size(big_corporation)).
- 
+
+at_most_(learning_preference, easy) :-
+  (learning_preference(easy); learning_preference(skip)).
+
+at_most_(learning_preference, hard) :-
+  (learning_preference(easy); learning_preference(hard); learning_preference(skip)).
+
 question(why) :-
   write('Dlaczego chcesz nauczyc sie programowac?'), nl.
  
@@ -82,6 +90,9 @@ question(company_size) :-
 question(math_background) :-
   write('Czy posiadasz matematyczny background?'), nl.
  
+question(favourite_company) :-
+  write('Wskaz ulubiona firme'), nl.
+
 control(Answer) :-
   knowledge_base(control, Answer).
 control(Answer) :-
@@ -117,7 +128,13 @@ company_size(Answer) :-
 company_size(Answer) :-
   \+ knowledge_base(company_size, _),
   ask(company_size, Answer, [startup, middle_sized_company, big_corporation, skip]).  
- 
+
+favourite_company(Answer) :-
+  knowledge_base(favourite_company, Answer).
+favourite_company(Answer) :-
+  \+ knowledge_base(favourite_company, _),
+  ask(favourite_company, Answer, [microsoft, google, skip]).  
+
 answer(manual) :-
   write('manualna').
  
@@ -177,7 +194,13 @@ answer(strong_math_background) :-
  
 answer(lack_of_math_background) :-
   write('Nie posiadam, chcialbym mozliwie odizolowac sie od tej dziedziny').
-  
+
+answer(microsoft) :-
+  write('Microsoft').
+
+answer(google) :-
+  write('Google').
+
 answer(skip) :-
   write('Nie wiem/pomin').
 
