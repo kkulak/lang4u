@@ -60,6 +60,9 @@ class Lang4UClient:
         self.prolog_shell.expect('\r\n\x1b[^m]*mtrue.', self.timeout)
         return _parse_chosen_language(self.prolog_shell.before)
 
+    def terminate(self):
+        self.prolog_shell.close()
+
 
 class ProgramDescription:
     def __init__(self, value):
@@ -67,6 +70,9 @@ class ProgramDescription:
 
     def __str__(self):
         return self.value
+
+    def serialize(self):
+        return {'value': self.value}
 
 
 class Question:
@@ -76,6 +82,12 @@ class Question:
     def __str__(self):
         return 'Q: ' + self.question_text + '\nA: ' + [a.__str__() for a in self.possible_answers].__str__()
 
+    def serialize(self):
+        return {
+            'text': self.question_text,
+            'answers': [answer.serialize() for answer in self.possible_answers]
+        }
+
 
 class PossibleAnswer:
     def __init__(self, ordinal, text):
@@ -84,6 +96,12 @@ class PossibleAnswer:
     def __str__(self):
         return self.ordinal + ': ' + self.text
 
+    def serialize(self):
+        return {
+            'ordinal': self.ordinal,
+            'text': self.text
+        }
+
 
 class ChosenLanguage:
     def __init__(self, value):
@@ -91,6 +109,9 @@ class ChosenLanguage:
 
     def __str__(self):
         return self.value
+
+    def serialize(self):
+        return {'value': self.value}
 
 
 class InvalidStateError(Exception):
