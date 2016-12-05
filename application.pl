@@ -20,13 +20,13 @@ language(cpp) :-
  
 language(c) :-
   why(experience),
-  (which_platform(embedded);which_platform(skip)),
+  platform_skip(embedded),
   learning_preference(hardest),
   is_(control, difficult).
  
 language(objc) :-
   why(money),
-  (which_platform(mobile);which_platform(skip)),
+  platform_skip(mobile),
   learning_preference(hard).
 
 language(js) :-
@@ -37,7 +37,7 @@ language(js) :-
 language(matlab) :-
   why(education),
   math_background(strong_math_background),
-  (which_platform(science);which_platform(skip)).
+  platform_skip(science).
 
 language(ruby) :-
   why(money),
@@ -50,6 +50,15 @@ language(csharp) :-
   at_most_(learning_preference, hard).
  
 language(fallback).
+
+platform_skip(science) :-
+  which_platform(science);which_platform(skip).
+  
+platform_skip(embedded) :-
+  which_platform(embedded);which_platform(skip).
+  
+platform_skip(mobile) :-
+  which_platform(mobile);which_platfomr(skip).
 
 is_(control, easy) :-
   (control(automatic);control(skip)).
