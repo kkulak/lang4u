@@ -6,7 +6,7 @@ __pycache__/
 *$py.class
 
 # C extensions
-*.so
+../lang4u/local/lib/python2.7/lib-dynload/_codecs_jp.x86_64-linux-gnu.so
 
 # Distribution / packaging
 .Python

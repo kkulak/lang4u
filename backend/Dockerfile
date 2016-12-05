@@ -1,5 +1,5 @@
 FROM swipl/swipl
 RUN apt-get install -y python python-dev python-pip
-COPY *.pl *.py requirements ./
+COPY ../application.pl *.py requirements ./
 RUN pip install -r requirements
 CMD ["python", "web_socket_server.py"]
