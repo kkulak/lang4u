@@ -5,7 +5,10 @@ import App from './App.jsx';
 
 export default React.createClass({
   _onChange() {
-    this.setState(QuizStore.getCurrentQuestion());
+    this.setState({
+      question: QuizStore.getCurrentQuestion(),
+      language: QuizStore.getChosenLanguage()
+    });
   },
 
   getInitialState() {
