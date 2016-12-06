@@ -58,7 +58,7 @@ platform_skip(embedded) :-
   which_platform(embedded);which_platform(skip).
   
 platform_skip(mobile) :-
-  which_platform(mobile);which_platfomr(skip).
+  which_platform(mobile);which_platform(skip).
 
 is_(control, easy) :-
   (control(automatic);control(skip)).
