@@ -46,6 +46,7 @@
     "object-assign": "^4.1.0",
     "react": "^0.13.3",
     "react-bootstrap": "^0.30.7",
-    "socket.io-client": "^1.7.1"
+    "socket.io-client": "^1.7.1",
+    "node-uuid": "^1.4.7"
   }
 }

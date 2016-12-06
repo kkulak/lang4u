@@ -1,6 +1,7 @@
 import React, {PropTypes} from 'react';
 import ListGroup from '../../node_modules/react-bootstrap/lib/ListGroup'
-import ListGroupItem from '../../node_modules/react-bootstrap/lib/ListGroupItem'
+import Answer from './Answer.jsx'
+import uuid from 'node-uuid';
 
 export default React.createClass({
   propTypes: {
@@ -20,14 +21,20 @@ export default React.createClass({
           {
             question.answers.map(answer => {
               return (
-                <ListGroupItem key={answer.ordinal} onClick={chooseAnswer(answer.ordinal)}>
-                  {answer.text}
-                </ListGroupItem>
+                <Answer key={this.answerIdentifier(answer)}
+                        text={answer.text}
+                        onSelect={chooseAnswer(answer.ordinal)}
+                        bsStyle="success" active>
+                </Answer>
               )
             })
           }
         </ListGroup>
       </div>
     );
+  },
+
+  answerIdentifier(answer) {
+    return answer.ordinal + uuid.v4()
   }
 });
