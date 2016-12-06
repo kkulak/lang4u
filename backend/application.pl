@@ -1,16 +1,17 @@
 % hypothesis
 language(python) :-
   why(entertainment),
-  (company_size(startup); company_size(middle_sized_company)),
-  (learning_preference(easy); learning_preference(skip)),
-  (control(automatic);control(skip)).
+  is_(company_size, medium),
+  at_most_(learning_preference, easy),
+  is_(control,easy).
  
 language(java) :-
   why(money),
-  (company_size(middle_sized_company); company_size(big_corporation)),
-  (learning_preference(easy); learning_preference(hard)),
+  is_(company_size,big),
+  at_most_(learning_preference, hard),
   (which_platform(erp); which_platform(mobile)),
-  (control(automatic);control(skip)).
+  favourite_company(google),
+  is_(control,easy).
  
 language(cpp) :-
   (which_platform(gaming);which_platform(skip)),
@@ -19,40 +20,67 @@ language(cpp) :-
  
 language(c) :-
   why(experience),
-  (which_platform(embedded);which_platform(skip)),
+  platform_skip(embedded),
   learning_preference(hardest),
-  control(manual).
+  is_(control, difficult).
  
 language(objc) :-
   why(money),
-  (which_platform(mobile);which_platform(skip)),
+  platform_skip(mobile),
   learning_preference(hard).
 
 language(js) :-
   why(money),
-  (company_size(startup); company_size(middle_sized_company)),
+  is_(company_size, medium),
   which_platform(web).
 
 language(matlab) :-
   why(education),
   math_background(strong_math_background),
-  (which_platform(linear_algebra);which_platform(skip)).
-
-/*
-language(php) :-
-*/
+  platform_skip(science).
 
 language(ruby) :-
   why(money),
-  company_size(startup),
+  is_(company_size,small),
   (which_platform(erp); which_platform(web)).
 
 language(csharp) :-
   why(money),
-  learning_preference(easy).
+  favourite_company(microsoft),
+  at_most_(learning_preference, hard).
  
 language(fallback).
- 
+
+platform_skip(science) :-
+  which_platform(science);which_platform(skip).
+  
+platform_skip(embedded) :-
+  which_platform(embedded);which_platform(skip).
+  
+platform_skip(mobile) :-
+  which_platform(mobile);which_platfomr(skip).
+
+is_(control, easy) :-
+  (control(automatic);control(skip)).
+  
+is_(control, difficult) :-
+  control(manual).
+  
+is_(company_size, small) :-
+  company_size(startup).
+  
+is_(company_size, medium):-
+  (company_size(startup); company_size(middle_sized_company)).
+  
+is_(company_size, big) :-
+  (company_size(middle_sized_company); company_size(big_corporation)).
+
+at_most_(learning_preference, easy) :-
+  (learning_preference(easy); learning_preference(skip)).
+
+at_most_(learning_preference, hard) :-
+  (learning_preference(easy); learning_preference(hard); learning_preference(skip)).
+
 question(why) :-
   write('Dlaczego chcesz nauczyc sie programowac?'), nl.
  
@@ -71,6 +99,9 @@ question(company_size) :-
 question(math_background) :-
   write('Czy posiadasz matematyczny background?'), nl.
  
+question(favourite_company) :-
+  write('Wskaz ulubiona firme'), nl.
+
 control(Answer) :-
   knowledge_base(control, Answer).
 control(Answer) :-
@@ -87,7 +118,7 @@ which_platform(Answer) :-
   knowledge_base(which_platform, Answer).
 which_platform(Answer) :-
   \+ knowledge_base(which_platform, _),
-  ask(which_platform, Answer, [erp, web, gaming, embedded, mobile, linear_algebra, skip]).
+  ask(which_platform, Answer, [erp, web, gaming, embedded, mobile, science, skip]).
  
 why(Answer) :-
   knowledge_base(why, Answer).
@@ -106,7 +137,13 @@ company_size(Answer) :-
 company_size(Answer) :-
   \+ knowledge_base(company_size, _),
   ask(company_size, Answer, [startup, middle_sized_company, big_corporation, skip]).  
- 
+
+favourite_company(Answer) :-
+  knowledge_base(favourite_company, Answer).
+favourite_company(Answer) :-
+  \+ knowledge_base(favourite_company, _),
+  ask(favourite_company, Answer, [microsoft, google, skip]).  
+
 answer(manual) :-
   write('manualna').
  
@@ -134,8 +171,8 @@ answer(embedded) :-
 answer(mobile) :-
   write('Oprogramowanie przeznaczone dla telefonow komorkowych').
  
-answer(linear_algebra) :-
-  write('Algebra liniowa').
+answer(science) :-
+  write('Nauki scisle').
 
 answer(hardest) :-
   write('bardzo trudnych').
@@ -166,7 +203,13 @@ answer(strong_math_background) :-
  
 answer(lack_of_math_background) :-
   write('Nie posiadam, chcialbym mozliwie odizolowac sie od tej dziedziny').
-  
+
+answer(microsoft) :-
+  write('Microsoft').
+
+answer(google) :-
+  write('Google').
+
 answer(skip) :-
   write('Nie wiem/pomin').
 
