@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!-- This network was created in trial version of GeNIe, which can be used for evaluation purposes only -->
+<smile version="1.0" id="Network2" numsamples="1000" discsamples="10000">
+	<nodes>
+		<cpt id="praca_w_korporacji">
+			<state id="Yes" />
+			<state id="No" />
+			<probabilities>0.5 0.5</probabilities>
+		</cpt>
+		<cpt id="sprawdzone_technologie">
+			<state id="Yes" />
+			<state id="No" />
+			<probabilities>0.5 0.5</probabilities>
+		</cpt>
+		<cpt id="zobowiazania_finansowe">
+			<state id="Yes" />
+			<state id="No" />
+			<probabilities>0.5 0.5</probabilities>
+		</cpt>
+		<cpt id="stabilna_sytuacja_zyciowa">
+			<state id="Yes" />
+			<state id="No" />
+			<parents>praca_w_korporacji sprawdzone_technologie zobowiazania_finansowe</parents>
+			<probabilities>1 0 0.66 0.34 0.66 0.34 0.34 0.6599999999999999 0.66 0.34 0.34 0.6599999999999999 0.34 0.6599999999999999 0 1</probabilities>
+		</cpt>
+		<cpt id="java">
+			<state id="Yes" />
+			<state id="No" />
+			<parents>stabilna_sytuacja_zyciowa</parents>
+			<probabilities>1 0 0 1</probabilities>
+		</cpt>
+		<cpt id="chec_dzielenia_sie_wiedza">
+			<state id="Yes" />
+			<state id="No" />
+			<probabilities>0.5 0.5</probabilities>
+		</cpt>
+		<cpt id="zainteresowanie_nauka">
+			<state id="Yes" />
+			<state id="No" />
+			<probabilities>0.5 0.5</probabilities>
+		</cpt>
+		<cpt id="szkolnictwo">
+			<state id="Yes" />
+			<state id="No" />
+			<parents>chec_dzielenia_sie_wiedza zainteresowanie_nauka</parents>
+			<probabilities>1 0 0.75 0.25 0.25 0.75 0 1</probabilities>
+		</cpt>
+		<cpt id="im_lub_kangur">
+			<state id="Yes" />
+			<state id="No" />
+			<probabilities>0.5 0.5</probabilities>
+		</cpt>
+		<cpt id="matematyk_blah">
+			<state id="Yes" />
+			<state id="No" />
+			<parents>zainteresowanie_nauka im_lub_kangur</parents>
+			<probabilities>1 0 0.25 0.75 0.75 0.25 0 1</probabilities>
+		</cpt>
+		<cpt id="matlab">
+			<state id="Yes" />
+			<state id="No" />
+			<parents>szkolnictwo matematyk_blah</parents>
+			<probabilities>1 0 0.5 0.5 0.5 0.5 0 1</probabilities>
+		</cpt>
+		<cpt id="Sth">
+			<state id="Yes" />
+			<state id="No" />
+			<probabilities>0.5 0.5</probabilities>
+		</cpt>
+		<cpt id="haskell">
+			<state id="Yes" />
+			<state id="No" />
+			<parents>matematyk_blah Sth</parents>
+			<probabilities>1 0 0.5 0.5 0.5 0.5 0 1</probabilities>
+		</cpt>
+	</nodes>
+	<extensions>
+		<genie version="1.0" app="GeNIe 2.1.1104.2 EVALUATION" name="Network2" faultnameformat="nodestate">
+			<node id="stabilna_sytuacja_zyciowa">
+				<name>Stabilna sytuacja zyciowa</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>124 215 267 272</position>
+			</node>
+			<node id="praca_w_korporacji">
+				<name>Praca w korporacji</name>
+				<interior color="ffcc00" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>14 109 135 148</position>
+			</node>
+			<node id="java">
+				<name>JAVA</name>
+				<interior color="008000" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>259 336 350 380</position>
+			</node>
+			<node id="sprawdzone_technologie">
+				<name>Sprawdzone technologie</name>
+				<interior color="ffcc00" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>121 39 274 76</position>
+			</node>
+			<node id="zobowiazania_finansowe">
+				<name>Zobowiazania finansowe</name>
+				<interior color="ffcc00" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>244 114 404 153</position>
+			</node>
+			<node id="matlab">
+				<name>Matlab</name>
+				<interior color="008000" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>562 374 656 417</position>
+			</node>
+			<node id="haskell">
+				<name>Haskell</name>
+				<interior color="008000" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>862 394 959 442</position>
+			</node>
+			<node id="szkolnictwo">
+				<name>Szkolnictwo</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>479 204 591 250</position>
+			</node>
+			<node id="matematyk_blah">
+				<name>Matematyk BLAH</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>718 202 817 248</position>
+			</node>
+			<node id="Sth">
+				<name>Sth</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>990 211 1062 243</position>
+			</node>
+			<node id="chec_dzielenia_sie_wiedza">
+				<name>Chec dzielenia sie wiedza</name>
+				<interior color="ffcc00" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>374 46 529 91</position>
+			</node>
+			<node id="zainteresowanie_nauka">
+				<name>Zainteresowanie nauka</name>
+				<interior color="ffcc00" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>537 88 719 120</position>
+			</node>
+			<node id="im_lub_kangur">
+				<name>Chec brania udzialu w konkursach matematycznych</name>
+				<interior color="ffcc00" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>704 48 886 100</position>
+			</node>
+		</genie>
+	</extensions>
+</smile>
