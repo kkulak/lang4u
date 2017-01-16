@@ -93,7 +93,7 @@
 			<state id="Yes" />
 			<state id="No" />
 			<parents>news people</parents>
-			<probabilities>1 0 1 0 1 0 1 0</probabilities>
+			<probabilities>1 0 0.5 0.5 0.5 0.5 0 1</probabilities>
 		</cpt>
 		<cpt id="haskell">
 			<state id="Yes" />
@@ -132,7 +132,7 @@
 			<state id="Yes" />
 			<state id="No" />
 			<parents>eksperymenty embedded manual_or_automatic</parents>
-			<probabilities>1 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0</probabilities>
+			<probabilities>1 0 0.8 0.2 0.8 0.2 0.6 0.4 0.8 0.2 0.6 0.4 0.4 0.6 0 1</probabilities>
 		</cpt>
 		<cpt id="ruby">
 			<state id="Yes" />
@@ -144,7 +144,7 @@
 			<state id="Yes" />
 			<state id="No" />
 			<parents>embedded manual_or_automatic</parents>
-			<probabilities>1 0 1 0 1 0 1 0</probabilities>
+			<probabilities>1 0 0.4 0.6 0.6 0.4 0.4 0.6</probabilities>
 		</cpt>
 		<cpt id="gaming_platform">
 			<state id="Yes" />
@@ -155,7 +155,7 @@
 			<state id="Yes" />
 			<state id="No" />
 			<parents>embedded gaming_platform manual_or_automatic</parents>
-			<probabilities>1 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0</probabilities>
+			<probabilities>1 0 0.7 0.3 0.8 0.2 0.6 0.4 0.9 0.1 0.7 0.3 0.3 0.7 0 1</probabilities>
 		</cpt>
 	</nodes>
 	<extensions>
@@ -179,7 +179,7 @@
 				<interior color="008000" />
 				<outline color="000080" />
 				<font color="000000" name="Arial" size="8" />
-				<position>451 347 542 391</position>
+				<position>379 362 470 406</position>
 			</node>
 			<node id="sprawdzone_technologie">
 				<name>Sprawdzone technologie</name>
@@ -249,7 +249,7 @@
 				<interior color="008000" />
 				<outline color="000080" />
 				<font color="000000" name="Arial" size="8" />
-				<position>573 350 664 394</position>
+				<position>503 362 594 406</position>
 			</node>
 			<node id="os">
 				<name>Preferowany OS</name>
@@ -263,98 +263,98 @@
 				<interior color="008000" />
 				<outline color="000080" />
 				<font color="000000" name="Arial" size="8" />
-				<position>689 348 780 392</position>
+				<position>624 364 715 408</position>
 			</node>
 			<node id="eksperymenty">
 				<name>Lubie eksperymentowac</name>
 				<interior color="e5f6f7" />
 				<outline color="000080" />
 				<font color="000000" name="Arial" size="8" />
-				<position>951 744 1094 801</position>
+				<position>1213 518 1356 575</position>
 			</node>
 			<node id="go">
 				<name>golang</name>
 				<interior color="008000" />
 				<outline color="000080" />
 				<font color="000000" name="Arial" size="8" />
-				<position>982 595 1076 638</position>
+				<position>937 512 1031 555</position>
 			</node>
 			<node id="ruby">
 				<name>Ruby</name>
 				<interior color="008000" />
 				<outline color="000080" />
 				<font color="000000" name="Arial" size="8" />
-				<position>1104 625 1198 668</position>
+				<position>1019 373 1113 416</position>
 			</node>
 			<node id="C">
 				<name>C</name>
 				<interior color="008000" />
 				<outline color="000080" />
 				<font color="000000" name="Arial" size="8" />
-				<position>857 631 951 674</position>
+				<position>830 580 924 623</position>
 			</node>
 			<node id="cpp">
 				<name>C++</name>
 				<interior color="008000" />
 				<outline color="000080" />
 				<font color="000000" name="Arial" size="8" />
-				<position>755 674 849 717</position>
+				<position>730 638 824 681</position>
 			</node>
 			<node id="embedded">
 				<name>Zainteresowanie embedded</name>
 				<interior color="ffcc00" />
 				<outline color="000080" />
 				<font color="000000" name="Arial" size="8" />
-				<position>833 443 976 500</position>
+				<position>773 334 916 391</position>
 			</node>
 			<node id="mobile_platform">
 				<name>Platformy mobilne</name>
 				<interior color="ffcc00" />
 				<outline color="000080" />
 				<font color="000000" name="Arial" size="8" />
-				<position>668 499 811 556</position>
+				<position>585 519 728 576</position>
 			</node>
 			<node id="web_platform">
 				<name>Platformy webowe</name>
 				<interior color="ffcc00" />
 				<outline color="000080" />
 				<font color="000000" name="Arial" size="8" />
-				<position>428 521 571 578</position>
+				<position>397 511 540 568</position>
 			</node>
 			<node id="gaming_platform">
 				<name>Gaming</name>
 				<interior color="ffcc00" />
 				<outline color="000080" />
 				<font color="000000" name="Arial" size="8" />
-				<position>514 677 657 734</position>
+				<position>511 630 654 687</position>
 			</node>
 			<node id="startup">
 				<name>Praca w startup&apos;ach</name>
 				<interior color="ffcc00" />
 				<outline color="000080" />
 				<font color="000000" name="Arial" size="8" />
-				<position>1070 468 1213 525</position>
+				<position>838 169 981 226</position>
 			</node>
 			<node id="manual_or_automatic">
 				<name>Manualna kontrola czy automatyzacja?</name>
 				<interior color="ffcc00" />
 				<outline color="000080" />
 				<font color="000000" name="Arial" size="8" />
-				<position>1307 744 1450 801</position>
+				<position>995 630 1138 687</position>
 			</node>
 			<node id="news">
 				<name>Na biezaco sledze nowinki z branzy IT</name>
 				<interior color="ffcc00" />
 				<outline color="000080" />
 				<font color="000000" name="Arial" size="8" />
-				<position>795 839 938 896</position>
+				<position>1217 642 1360 699</position>
 			</node>
 			<node id="people">
 				<name>Lubie zmieniac otoczenie ludzi wsrod ktorych pracuje</name>
 				<interior color="ffcc00" />
 				<outline color="000080" />
 				<font color="000000" name="Arial" size="8" />
-				<position>1080 830 1263 891</position>
+				<position>1413 517 1596 578</position>
 			</node>
 		</genie>
 	</extensions>
