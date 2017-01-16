@@ -30,11 +30,21 @@
 			<state id="Dowolna" />
 			<probabilities>0.25 0.25 0.25 0.25</probabilities>
 		</cpt>
+		<cpt id="mobile_platform">
+			<state id="Yes" />
+			<state id="No" />
+			<probabilities>0.5 0.5</probabilities>
+		</cpt>
+		<cpt id="web_platform">
+			<state id="Yes" />
+			<state id="No" />
+			<probabilities>0.5 0.5</probabilities>
+		</cpt>
 		<cpt id="java">
 			<state id="Yes" />
 			<state id="No" />
-			<parents>stabilna_sytuacja_zyciowa os</parents>
-			<probabilities>0.4 0.6 0.4 0.6 0.8 0.2 0.7 0.3 0.2 0.8 0.2 0.8 0.2 0.8 0.2 0.8</probabilities>
+			<parents>stabilna_sytuacja_zyciowa os mobile_platform web_platform</parents>
+			<probabilities>0.4 0.6 0.4 0.6 0.4 0.6 0.4 0.6 0.4 0.6 0.4 0.6 0.4 0.6 0.4 0.6 0.8 0.2 0.8 0.2 0.8 0.2 0.8 0.2 0.7 0.3 0.7 0.3 0.7 0.3 0.7 0.3 0.2 0.8 0.2 0.8 0.2 0.8 0.2 0.8 0.2 0.8 0.2 0.8 0.2 0.8 0.2 0.8 0.2 0.8 0.2 0.8 0.2 0.8 0.2 0.8 0.2 0.8 0.2 0.8 0.2 0.8 0.2 0.8</probabilities>
 		</cpt>
 		<cpt id="chec_dzielenia_sie_wiedza">
 			<state id="Yes" />
@@ -57,7 +67,7 @@
 			<state id="No" />
 			<probabilities>0.5 0.5</probabilities>
 		</cpt>
-		<cpt id="matematyk_blah">
+		<cpt id="naukowiec">
 			<state id="Yes" />
 			<state id="No" />
 			<parents>zainteresowanie_nauka im_lub_kangur</parents>
@@ -66,31 +76,86 @@
 		<cpt id="matlab">
 			<state id="Yes" />
 			<state id="No" />
-			<parents>szkolnictwo matematyk_blah</parents>
+			<parents>szkolnictwo naukowiec</parents>
 			<probabilities>1 0 0.5 0.5 0.5 0.5 0 1</probabilities>
 		</cpt>
-		<cpt id="Sth">
+		<cpt id="news">
 			<state id="Yes" />
 			<state id="No" />
 			<probabilities>0.5 0.5</probabilities>
 		</cpt>
+		<cpt id="people">
+			<state id="Yes" />
+			<state id="No" />
+			<probabilities>0.5 0.5</probabilities>
+		</cpt>
+		<cpt id="eksperymenty">
+			<state id="Yes" />
+			<state id="No" />
+			<parents>news people</parents>
+			<probabilities>1 0 1 0 1 0 1 0</probabilities>
+		</cpt>
 		<cpt id="haskell">
 			<state id="Yes" />
 			<state id="No" />
-			<parents>matematyk_blah Sth</parents>
-			<probabilities>1 0 0.5 0.5 0.5 0.5 0 1</probabilities>
+			<parents>naukowiec eksperymenty</parents>
+			<probabilities>1 0 1 0 0.5 0.5 0.5 0.5</probabilities>
 		</cpt>
 		<cpt id="Csharp">
 			<state id="Yes" />
 			<state id="No" />
-			<parents>stabilna_sytuacja_zyciowa os</parents>
-			<probabilities>1 0 0.2 0.8 0.2 0.8 0.5 0.5 0.8 0.2 0 1 0 1 0 1</probabilities>
+			<parents>stabilna_sytuacja_zyciowa os web_platform</parents>
+			<probabilities>1 0 1 0 0.2 0.8 0.2 0.8 0.2 0.8 0.2 0.8 0.5 0.5 0.5 0.5 0.8 0.2 0.8 0.2 0 1 0 1 0 1 0 1 0 1 0 1</probabilities>
+		</cpt>
+		<cpt id="startup">
+			<state id="Yes" />
+			<state id="No" />
+			<probabilities>0.5 0.5</probabilities>
 		</cpt>
 		<cpt id="Swift">
 			<state id="Yes" />
 			<state id="No" />
-			<parents>stabilna_sytuacja_zyciowa os</parents>
-			<probabilities>0 1 1 0 0 1 0 1 0 1 0.7 0.3 0 1 0 1</probabilities>
+			<parents>stabilna_sytuacja_zyciowa os mobile_platform startup</parents>
+			<probabilities>0 1 0 1 0 1 0 1 1 0 1 0 1 0 1 0 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0.7 0.3 0.7 0.3 0.7 0.3 0.7 0.3 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1</probabilities>
+		</cpt>
+		<cpt id="embedded">
+			<state id="Yes" />
+			<state id="No" />
+			<probabilities>0.5 0.5</probabilities>
+		</cpt>
+		<cpt id="manual_or_automatic">
+			<state id="Manual" />
+			<state id="Automatic" />
+			<probabilities>1 0</probabilities>
+		</cpt>
+		<cpt id="go">
+			<state id="Yes" />
+			<state id="No" />
+			<parents>eksperymenty embedded manual_or_automatic</parents>
+			<probabilities>1 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0</probabilities>
+		</cpt>
+		<cpt id="ruby">
+			<state id="Yes" />
+			<state id="No" />
+			<parents>eksperymenty web_platform startup manual_or_automatic</parents>
+			<probabilities>1 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0</probabilities>
+		</cpt>
+		<cpt id="C">
+			<state id="Yes" />
+			<state id="No" />
+			<parents>embedded manual_or_automatic</parents>
+			<probabilities>1 0 1 0 1 0 1 0</probabilities>
+		</cpt>
+		<cpt id="gaming_platform">
+			<state id="Yes" />
+			<state id="No" />
+			<probabilities>0.5 0.5</probabilities>
+		</cpt>
+		<cpt id="cpp">
+			<state id="Yes" />
+			<state id="No" />
+			<parents>embedded gaming_platform manual_or_automatic</parents>
+			<probabilities>1 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0</probabilities>
 		</cpt>
 	</nodes>
 	<extensions>
@@ -100,7 +165,7 @@
 				<interior color="e5f6f7" />
 				<outline color="000080" />
 				<font color="000000" name="Arial" size="8" />
-				<position>547 213 690 270</position>
+				<position>550 168 693 225</position>
 			</node>
 			<node id="praca_w_korporacji">
 				<name>Praca w korporacji</name>
@@ -114,7 +179,7 @@
 				<interior color="008000" />
 				<outline color="000080" />
 				<font color="000000" name="Arial" size="8" />
-				<position>410 372 501 416</position>
+				<position>451 347 542 391</position>
 			</node>
 			<node id="sprawdzone_technologie">
 				<name>Sprawdzone technologie</name>
@@ -151,19 +216,12 @@
 				<font color="000000" name="Arial" size="8" />
 				<position>1072 192 1184 238</position>
 			</node>
-			<node id="matematyk_blah">
-				<name>Matematyk BLAH</name>
+			<node id="naukowiec">
+				<name>Naukowiec</name>
 				<interior color="e5f6f7" />
 				<outline color="000080" />
 				<font color="000000" name="Arial" size="8" />
 				<position>1311 190 1410 236</position>
-			</node>
-			<node id="Sth">
-				<name>Sth</name>
-				<interior color="e5f6f7" />
-				<outline color="000080" />
-				<font color="000000" name="Arial" size="8" />
-				<position>1583 199 1655 231</position>
 			</node>
 			<node id="chec_dzielenia_sie_wiedza">
 				<name>Chec dzielenia sie wiedza</name>
@@ -180,18 +238,18 @@
 				<position>1136 37 1318 83</position>
 			</node>
 			<node id="im_lub_kangur">
-				<name>Chec brania udzialu w konkursach matematycznych</name>
+				<name>Czy brales w przeszlosci udzial w konkursach matematycznych?</name>
 				<interior color="ffcc00" />
 				<outline color="000080" />
 				<font color="000000" name="Arial" size="8" />
-				<position>1353 40 1535 92</position>
+				<position>1353 40 1573 111</position>
 			</node>
 			<node id="Csharp">
 				<name>C#</name>
 				<interior color="008000" />
 				<outline color="000080" />
 				<font color="000000" name="Arial" size="8" />
-				<position>543 373 634 417</position>
+				<position>573 350 664 394</position>
 			</node>
 			<node id="os">
 				<name>Preferowany OS</name>
@@ -205,7 +263,98 @@
 				<interior color="008000" />
 				<outline color="000080" />
 				<font color="000000" name="Arial" size="8" />
-				<position>667 374 758 418</position>
+				<position>689 348 780 392</position>
+			</node>
+			<node id="eksperymenty">
+				<name>Lubie eksperymentowac</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>951 744 1094 801</position>
+			</node>
+			<node id="go">
+				<name>golang</name>
+				<interior color="008000" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>982 595 1076 638</position>
+			</node>
+			<node id="ruby">
+				<name>Ruby</name>
+				<interior color="008000" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>1104 625 1198 668</position>
+			</node>
+			<node id="C">
+				<name>C</name>
+				<interior color="008000" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>857 631 951 674</position>
+			</node>
+			<node id="cpp">
+				<name>C++</name>
+				<interior color="008000" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>755 674 849 717</position>
+			</node>
+			<node id="embedded">
+				<name>Zainteresowanie embedded</name>
+				<interior color="ffcc00" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>833 443 976 500</position>
+			</node>
+			<node id="mobile_platform">
+				<name>Platformy mobilne</name>
+				<interior color="ffcc00" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>668 499 811 556</position>
+			</node>
+			<node id="web_platform">
+				<name>Platformy webowe</name>
+				<interior color="ffcc00" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>428 521 571 578</position>
+			</node>
+			<node id="gaming_platform">
+				<name>Gaming</name>
+				<interior color="ffcc00" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>514 677 657 734</position>
+			</node>
+			<node id="startup">
+				<name>Praca w startup&apos;ach</name>
+				<interior color="ffcc00" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>1070 468 1213 525</position>
+			</node>
+			<node id="manual_or_automatic">
+				<name>Manualna kontrola czy automatyzacja?</name>
+				<interior color="ffcc00" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>1307 744 1450 801</position>
+			</node>
+			<node id="news">
+				<name>Na biezaco sledze nowinki z branzy IT</name>
+				<interior color="ffcc00" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>795 839 938 896</position>
+			</node>
+			<node id="people">
+				<name>Lubie zmieniac otoczenie ludzi wsrod ktorych pracuje</name>
+				<interior color="ffcc00" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>1080 830 1263 891</position>
 			</node>
 		</genie>
 	</extensions>
